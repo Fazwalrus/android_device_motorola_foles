@@ -100,6 +100,9 @@ on boot
    chmod 660 /dev/cci_intf
    chown system camera /dev/cci_intf
 
+on post-fs
+    mount none /vendor/firmware_mnt/image/bdwlan_parker_ipa.bin /vendor/firmware_mnt/image/bdwlan.bin bind
+
 on property:ro.build.type=userdebug
     insmod /vendor/lib/modules/watchdogtest.ko
 
