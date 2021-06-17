@@ -14,7 +14,9 @@
 # limitations under the License.
 #
 
+PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_SHIPPING_API_LEVEL := 28
+PRODUCT_USE_DYNAMIC_PARTITIONS := false
 
 $(call inherit-product, device/motorola/sm6150-common/common.mk)
 
