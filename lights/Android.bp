@@ -26,6 +26,7 @@ cc_binary {
         "libbase",
         "libhidlbase",
         "liblog",
+        "libhardware",
         "libutils",
         "android.hardware.light@2.0",
     ],

@@ -62,7 +62,8 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.parker
+    android.hardware.lights-service.parker \
+    android.hardware.light@2.0-service.parker
 
 # NFC
 PRODUCT_PACKAGES += \

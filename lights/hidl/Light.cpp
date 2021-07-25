@@ -18,6 +18,9 @@
 
 #include <log/log.h>
 
+#include <android-base/logging.h>
+#include <android-base/stringprintf.h>
+
 #include "Light.h"
 
 #include <fstream>
@@ -30,11 +33,14 @@ namespace implementation {
 
 #define LEDS            "/sys/class/leds/"
 
-#define LCD_LED         LEDS "lcd-backlight/"
-#define CHARGING_LED    LEDS "charging/"
+#define LCD_LED         "/sys/class/backlight/panel0-backlight/brightness"
+#define RED_LED         LEDS "red_moto/"
+#define GREEN_LED       LEDS "green_moto/"
+#define BLUE_LED        LEDS "blue_moto/"
 
+#define BREATH           "breath"
+#define BREATH_PATTERN   "breath_pattern"
 #define BRIGHTNESS      "brightness"
-#define BREATH          "breath"
 #define DELAY_OFF       "delay_off"
 #define DELAY_ON        "delay_on"
 
@@ -55,56 +61,131 @@ static void set(std::string path, std::string value) {
 static void set(std::string path, int value) {
     set(path, std::to_string(value));
 }
-    
-static uint32_t rgbToBrightness(const LightState& state) {
-    uint32_t color = state.color & 0x00ffffff;
-    return ((77 * ((color >> 16) & 0xff)) + (150 * ((color >> 8) & 0xff)) +
-            (29 * (color & 0xff))) >> 8;
+
+template <typename T>
+static T get(const std::string& path, const T& def) {
+    std::ifstream file(path);
+    T result;
+
+    file >> result;
+    return file.fail() ? def : result;
 }
 
 static void handleBacklight(const LightState& state) {
-    uint32_t brightness = rgbToBrightness(state);
-    set(LCD_LED BRIGHTNESS, brightness);
+    int brightness = Light::rgbToBrightness(state);
+    set(LCD_LED, brightness);
+}
+
+/*
+ * Get breath value as color + pauseHi + pauseLo
+ * rise_time hold_time fall_time off_time
+ */
+static std::string getBreathPatternValue(uint32_t pauseHi,
+    uint32_t pauseLo) {
+
+    char buffer[40];
+    snprintf(buffer, sizeof(buffer), "%d %d %d %d\n",
+        pauseLo, pauseHi, pauseLo, pauseHi);
+    std::string ret = buffer;
+    return ret;
+}
+
+static void handleBattery(const LightState& state) {
+    int brightness = Light::rgbToBrightness(state);
+
+    set(RED_LED BREATH, brightness == 0 ? 0 : 1);
+    set(RED_LED BRIGHTNESS, brightness);
+
+    set(GREEN_LED BREATH, brightness == 0 ? 0 : 1);
+    set(GREEN_LED BRIGHTNESS, brightness);
+
+    set(BLUE_LED BREATH, brightness == 0 ? 0 : 1);
+    set(BLUE_LED BRIGHTNESS, brightness);
 }
 
 static void handleNotification(const LightState& state) {
-    uint32_t alpha, brightness;
+    uint32_t redBrightness, greenBrightness, blueBrightness, brightness;
 
     /*
      * Extract brightness from AARRGGBB.
      */
-    alpha = (state.color >> 24) & 0xFF;
-    brightness = rgbToBrightness(state);
+    redBrightness = (state.color >> 16) & 0xFF;
+    greenBrightness = (state.color >> 8) & 0xFF;
+    blueBrightness = state.color & 0xFF;
+
+    brightness = (state.color >> 24) & 0xFF;
 
     /*
-     * Scale brightness if the Alpha brightness is not 0xFF.
+     * Scale RGB brightness if the Alpha brightness is not 0xFF.
      */
-    if (alpha != 0xFF)
-        brightness = (brightness * alpha) / 0xFF;
-    
-    /* Disable blinking. */
-    set(CHARGING_LED BREATH, 0);
+    if (brightness != 0xFF) {
+        redBrightness = (redBrightness * brightness) / 0xFF;
+        greenBrightness = (greenBrightness * brightness) / 0xFF;
+        blueBrightness = (blueBrightness * brightness) / 0xFF;
+    }
+
+
+    /* Disable breathing. */
+    set(RED_LED BREATH, 0);
+    set(RED_LED BRIGHTNESS, 0);
+    set(GREEN_LED BREATH, 0);
+    set(GREEN_LED BRIGHTNESS, 0);
+    set(BLUE_LED BREATH, 0);
+    set(BLUE_LED BRIGHTNESS, 0);
 
     if (state.flashMode == Flash::TIMED) {
-        /* Set LED */
-        set(CHARGING_LED DELAY_OFF, state.flashOffMs);
-        set(CHARGING_LED DELAY_ON, state.flashOnMs);
+        int32_t pauseHi = state.flashOnMs;
+        int32_t pauseLo = state.flashOffMs;
+        int32_t breath = 0;
 
-        /* Enable blinking. */
-        set(CHARGING_LED BREATH, 1);
+        if (pauseHi > 0 && pauseLo > 0) {
+            breath = 1;
+        }
+
+        /* Enable breathing if times are higher than 0. */
+        if (breath){
+            if (redBrightness > 0 || greenBrightness > 0 || blueBrightness > 0) {
+                set(RED_LED BREATH_PATTERN, getBreathPatternValue(pauseHi, pauseLo));
+                set(RED_LED BREATH, 1);
+                set(RED_LED BRIGHTNESS, 255);
+
+                set(GREEN_LED BREATH_PATTERN, getBreathPatternValue(pauseHi, pauseLo));
+                set(GREEN_LED BREATH, 1);
+                set(GREEN_LED BRIGHTNESS, 255);
+
+                set(BLUE_LED BREATH_PATTERN, getBreathPatternValue(pauseHi, pauseLo));
+                set(BLUE_LED BREATH, 1);
+                set(BLUE_LED BRIGHTNESS, 255);
+            }
+        }
     } else {
-        set(CHARGING_LED BRIGHTNESS, brightness);
+        if (redBrightness > 0 || greenBrightness > 0 || blueBrightness > 0) {
+                set(RED_LED BRIGHTNESS, 255);
+                set(GREEN_LED BRIGHTNESS, 255);
+                set(BLUE_LED BRIGHTNESS, 255);
+        } else {
+                set(RED_LED BRIGHTNESS, 0);
+                set(GREEN_LED BRIGHTNESS, 0);
+                set(BLUE_LED BRIGHTNESS, 0);
+        }
     }
+
 }
 
 static std::map<Type, std::function<void(const LightState&)>> lights = {
     {Type::BACKLIGHT, handleBacklight},
-    {Type::BATTERY, handleNotification},
+    {Type::BATTERY, handleBattery},
     {Type::NOTIFICATIONS, handleNotification},
     {Type::ATTENTION, handleNotification},
 };
 
 Light::Light() {}
+
+int Light::rgbToBrightness(const LightState &state) {
+    int color = state.color & 0x00ffffff;
+    return ((77 * ((color >> 16) & 0x00ff))
+            + (150 * ((color >> 8) & 0x00ff)) + (29 * (color & 0x00ff))) >> 8;
+}
 
 Return<Status> Light::setLight(Type type, const LightState& state) {
     auto it = lights.find(type);
