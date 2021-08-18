@@ -15,6 +15,7 @@
       "Path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
       "Values": [
         "9999999",
+        "1363200",
         "1209600",
         "576000"
       ],
@@ -104,7 +105,7 @@
       "Name": "TASchedtuneBoost",
       "Path": "/dev/stune/top-app/schedtune.boost",
       "Values": [
-        "15",
+        "40",
         "10"
       ],
       "ResetOnInit": true
@@ -233,7 +234,7 @@
       "Name": "L3LittleClusterMinFreq",
       "Path": "/sys/class/devfreq/soc:qcom,cpu0-cpu-l3-lat/min_freq",
       "Values": [
-        "1459200000",
+        "1363200000",
         "300000000"
       ],
       "ResetOnInit": true
@@ -251,7 +252,7 @@
       "Name": "L3BigClusterMinFreq",
       "Path": "/sys/class/devfreq/soc:qcom,cpu6-cpu-l3-lat/min_freq",
       "Values": [
-        "1459200000",
+        "1363200000",
         "300000000"
       ],
       "ResetOnInit": true
@@ -260,7 +261,7 @@
       "Name": "PMQoSCpuDmaLatency",
       "Path": "/dev/cpu_dma_latency",
       "Values": [
-        "43",
+        "44",
         "100"
       ],
       "HoldFd": true
@@ -331,13 +332,13 @@
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 0,
-      "Value": "1209600"
+      "Value": "1363200"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "TASchedtuneBoost",
       "Duration": 0,
-      "Value": "15"
+      "Value": "40"
     },
     {
       "PowerHint": "INTERACTION",
@@ -403,7 +404,7 @@
       "PowerHint": "LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 5000,
-      "Value": "43"
+      "Value": "44"
     },
     {
       "PowerHint": "LAUNCH",
@@ -457,13 +458,13 @@
       "PowerHint": "LAUNCH",
       "Node": "L3LittleClusterMinFreq",
       "Duration": 5000,
-      "Value": "1459200000"
+      "Value": "1363200000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "L3BigClusterMinFreq",
       "Duration": 5000,
-      "Value": "1459200000"
+      "Value": "1363200000"
     },
     {
       "PowerHint": "CAMERA_LAUNCH",
@@ -505,7 +506,7 @@
       "PowerHint": "CAMERA_LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 1000,
-      "Value": "43"
+      "Value": "44"
     },
     {
       "PowerHint": "CAMERA_STREAMING_MID",
@@ -727,13 +728,13 @@
       "PowerHint": "CAMERA_SHOT",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 1000,
-      "Value": "43"
+      "Value": "44"
     },
     {
       "PowerHint": "AUDIO_LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 2000,
-      "Value": "43"
+      "Value": "44"
     },
     {
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
@@ -745,7 +746,7 @@
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 0,
-      "Value": "43"
+      "Value": "44"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -769,7 +770,7 @@
       "PowerHint": "ML_ACC",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 2000,
-      "Value": "43"
+      "Value": "44"
     }
   ]
 }
