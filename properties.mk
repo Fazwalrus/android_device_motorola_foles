@@ -10,6 +10,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.fingerprint=goodix
 
+# SoC
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.soc.manufacturer=Qualcomm \
+    ro.soc.model=SM6150
+
 # Firmware
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.hw.modem_version=.
