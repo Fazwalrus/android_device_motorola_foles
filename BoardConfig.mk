@@ -16,20 +16,20 @@
 
 -include device/motorola/sm6150-common/BoardConfigCommon.mk
 
-DEVICE_PATH := device/motorola/parker
+DEVICE_PATH := device/motorola/foles
 
 # Display
 TARGET_SCREEN_DENSITY := 420
 
 # FOD
-TARGET_SURFACEFLINGER_FOD_LIB := //$(DEVICE_PATH):libfod_extension.parker
+TARGET_SURFACEFLINGER_FOD_LIB := //$(DEVICE_PATH):libfod_extension.foles
 TARGET_USES_FOD_ZPOS := true
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
 # Kernel
-TARGET_KERNEL_CONFIG := vendor/parker_defconfig
+TARGET_KERNEL_CONFIG := vendor/foles_defconfig
 
 # Kernel modules - Audio
 TARGET_MODULE_ALIASES += \

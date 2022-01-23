@@ -1,0 +1,16 @@
+type hal_lineage_fod_foles, domain;
+hal_server_domain(hal_lineage_fod_foles, hal_lineage_fod)
+
+type hal_lineage_fod_foles_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_lineage_fod_foles)
+
+wakelock_use(hal_lineage_fod_foles)
+
+# Allow access to the HALs
+hal_client_domain(hal_lineage_fod_foles, hal_fingerprint)
+
+# Allow binder communication with hal_fingerprint_foles
+binder_call(hal_lineage_fod_foles, hal_fingerprint_default)
+
+allow hal_lineage_fod_foles sysfs_graphics:dir r_dir_perms;
+allow hal_lineage_fod_foles sysfs_graphics:file r_file_perms;

@@ -21,7 +21,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := false
 $(call inherit-product, device/motorola/sm6150-common/common.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/motorola/parker/parker-vendor.mk)
+$(call inherit-product, vendor/motorola/foles/foles-vendor.mk)
 
 # Properties
 -include $(LOCAL_PATH)/properties.mk
@@ -50,7 +50,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.parker
+    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.foles
 
 # Power
 PRODUCT_COPY_FILES += \
@@ -62,8 +62,8 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.parker \
-    android.hardware.light@2.0-service.parker
+    android.hardware.lights-service.foles \
+    android.hardware.light@2.0-service.foles
 
 # NFC
 PRODUCT_PACKAGES += \

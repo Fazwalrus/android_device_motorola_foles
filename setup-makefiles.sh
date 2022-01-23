@@ -7,7 +7,7 @@
 
 set -e
 
-export DEVICE=parker
+export DEVICE=foles
 export DEVICE_COMMON=sm6150-common
 export VENDOR=motorola
 

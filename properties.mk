@@ -1,10 +1,10 @@
 #
-# Properties for parker
+# Properties for foles
 #
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.camera.physical.num=5
+    persist.vendor.camera.physical.num=2
 
 # Fingerprint
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -20,5 +20,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Sensor
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.hardware.sensors=parker \
+    ro.hardware.sensors=foles \
     ro.vendor.sensors.mot_ltv=tru

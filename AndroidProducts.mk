@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_parker.mk
+    $(LOCAL_DIR)/lineage_foles.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_parker-eng \
-    lineage_parker-user \
-    lineage_parker-userdebug
+    lineage_foles-eng \
+    lineage_foles-user \
+    lineage_foles-userdebug
