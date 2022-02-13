@@ -11,7 +11,7 @@ on property:sys.boot_completed=1
 
 on early-init
    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules cirrus_irq-madera arizona-ldo1 arizona-micsupp gpio-madera madera-pinctrl cirrus_cs35l41 cirrus_cs47l35 cirrus_madera-core cirrus_madera extcon-madera cirrus_playback aov_trigger cirrus_wm_adsp
-   insmod /vendor/lib/modules/aw8695.ko
+   insmod /vendor/lib/modules/aw869x.ko
    insmod /vendor/lib/modules/goodix_fod_mmi.ko
 
 on init
