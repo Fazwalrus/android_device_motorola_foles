@@ -51,7 +51,11 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
+<<<<<<< HEAD
     vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.foles
+=======
+    android.hardware.biometrics.fingerprint@2.3-service.moto_parker
+>>>>>>> 8df5a98... parker: build fingerprint service
 
 # Power
 PRODUCT_COPY_FILES += \

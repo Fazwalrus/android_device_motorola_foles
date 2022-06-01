@@ -22,7 +22,11 @@ DEVICE_PATH := device/motorola/foles
 TARGET_SCREEN_DENSITY := 420
 
 # FOD
+<<<<<<< HEAD
 TARGET_SURFACEFLINGER_FOD_LIB := //$(DEVICE_PATH):libfod_extension.foles
+=======
+TARGET_SURFACEFLINGER_UDFPS_LIB := //$(DEVICE_PATH):libudfps_extension.moto_parker
+>>>>>>> 8df5a98... parker: build fingerprint service
 TARGET_USES_FOD_ZPOS := true
 
 # HIDL

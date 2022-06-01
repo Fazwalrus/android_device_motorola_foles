@@ -1,6 +1,10 @@
 # HAL Services
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-goodixservice                   u:object_r:hal_fingerprint_default_exec:s0
+<<<<<<< HEAD
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1\.0-service\.foles          u:object_r:hal_lineage_fod_foles_exec:s0
+=======
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.moto_parker            u:object_r:hal_fingerprint_parker_exec:s0
+>>>>>>> 8df5a98... parker: build fingerprint service
 
 # Fingerprint
 /dev/goodix_fp                  u:object_r:fingerprint_device:s0
