@@ -31,6 +31,9 @@ DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 # Kernel
 TARGET_KERNEL_CONFIG := vendor/foles_defconfig
 
+# Prebuilt
+TARGET_PREBUILT_KERNEL := $(PLATFORM_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
+
 # Kernel modules - Audio
 TARGET_MODULE_ALIASES += \
     snd-soc-aov-trigger.ko:aov_trigger.ko \
