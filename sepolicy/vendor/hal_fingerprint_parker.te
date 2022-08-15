@@ -1,3 +1,8 @@
+allow hal_fingerprint_parker {
+  fingerprint_device
+  tee_device
+}: chr_file rw_file_perms;
+
 type hal_fingerprint_parker, domain;
 hal_server_domain(hal_fingerprint_parker, hal_fingerprint)
 
@@ -14,3 +19,4 @@ binder_call(hal_fingerprint_parker, hal_fingerprint_default)
 
 allow hal_fingerprint_parker vendor_sysfs_graphics:dir r_dir_perms;
 allow hal_fingerprint_parker vendor_sysfs_graphics:file r_file_perms;
+allow hal_fingerprint_parker self:netlink_socket create_socket_perms_no_ioctl;
