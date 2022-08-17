@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.lights-service.parker"
+#define LOG_TAG "android.hardware.lights-service.foles"
 
 #include "Lights.h"
 #include <android-base/file.h>

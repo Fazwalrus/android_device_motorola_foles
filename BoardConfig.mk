@@ -25,8 +25,8 @@ TARGET_SCREEN_DENSITY := 420
 <<<<<<< HEAD
 TARGET_SURFACEFLINGER_FOD_LIB := //$(DEVICE_PATH):libfod_extension.foles
 =======
-TARGET_SURFACEFLINGER_UDFPS_LIB := //$(DEVICE_PATH):libudfps_extension.moto_parker
->>>>>>> 8df5a98... parker: build fingerprint service
+TARGET_SURFACEFLINGER_UDFPS_LIB := //$(DEVICE_PATH):libudfps_extension.moto_foles
+>>>>>>> 8df5a98... foles: build fingerprint service
 TARGET_USES_FOD_ZPOS := true
 
 # HIDL

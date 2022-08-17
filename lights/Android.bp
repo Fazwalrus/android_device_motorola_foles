@@ -14,10 +14,10 @@
 // limitations under the License.
 
 cc_binary {
-    name: "android.hardware.light@2.0-service.parker",
+    name: "android.hardware.light@2.0-service.foles",
     defaults: ["hidl_defaults"],
-    init_rc: ["hidl/android.hardware.light@2.0-service.parker.rc"],
-    vintf_fragments: ["hidl/android.hardware.light@2.0-service.parker.xml"],
+    init_rc: ["hidl/android.hardware.light@2.0-service.foles.rc"],
+    vintf_fragments: ["hidl/android.hardware.light@2.0-service.foles.xml"],
     srcs: [
         "hidl/service.cpp",
         "hidl/Light.cpp",
@@ -35,10 +35,10 @@ cc_binary {
 }
 
 cc_binary {
-    name: "android.hardware.lights-service.parker",
+    name: "android.hardware.lights-service.foles",
     relative_install_path: "hw",
-    init_rc: ["aidl/android.hardware.lights.parker.rc"],
-    vintf_fragments: ["aidl/android.hardware.lights.parker.xml"],
+    init_rc: ["aidl/android.hardware.lights.foles.rc"],
+    vintf_fragments: ["aidl/android.hardware.lights.foles.xml"],
     vendor: true,
     shared_libs: [
         "libbase",

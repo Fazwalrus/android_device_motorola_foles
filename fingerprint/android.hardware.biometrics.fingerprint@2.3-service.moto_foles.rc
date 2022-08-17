@@ -1,4 +1,4 @@
-service vendor.fps_hal.moto-parker /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.3-service.moto_parker
+service vendor.fps_hal.moto-foles /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.3-service.moto_foles
     # "class hal" causes a race condition on some devices due to files created
     # in /data. As a workaround, postpone startup until later in boot once
     # /data is mounted.
