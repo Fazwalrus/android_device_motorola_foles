@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_foles.mk
+    $(LOCAL_DIR)/aosp_foles.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_foles-eng \
-    lineage_foles-user \
-    lineage_foles-userdebug
+    aosp_foles-eng \
+    aosp_foles-user \
+    aosp_foles-userdebug
