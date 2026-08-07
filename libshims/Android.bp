@@ -1,0 +1,9 @@
+//
+// Shims for pre-Android-10 vendor blobs.
+//
+
+cc_library_shared {
+    name: "libshim_charge_only",
+    srcs: ["memset32.c"],
+    vendor: true,
+}

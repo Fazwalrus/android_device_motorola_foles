@@ -67,6 +67,10 @@ PRODUCT_PACKAGES += \
     init.gbmods.sh \
     init.mmi.overlay.rc
 
+# Shims
+PRODUCT_PACKAGES += \
+    libshim_charge_only
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.foles \

@@ -48,6 +48,12 @@ BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 
+# Shims
+# charge_only_mode still imports android_memset32, dropped from libcutils
+# after Android 9; without this it can't link and off-mode charging has no
+# UI daemon at all.
+TARGET_LD_SHIM_LIBS := /vendor/bin/charge_only_mode|libshim_charge_only.so
+
 # SELinux
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
