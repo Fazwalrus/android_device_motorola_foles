@@ -1,0 +1,25 @@
+# Types that must be visible to both core and vendor policy.
+# Modelled on sdm660-common/beckham, which runs these mods enforcing.
+
+# ModService's own domain, so mods permissions don't have to be granted to
+# every platform-signed app.
+#
+# NOTE: beckham declares this mlstrustedsubject, but it can't be here.
+# Their ModService runs as the system uid so its data is system_app_data_file;
+# ours runs as a normal app uid, so its data is app_data_file - and
+# private/mlstrustedsubject.te neverallows mlstrustedsubject from touching
+# app_data_file:dir. The sysfs types below are already mlstrustedobject, so
+# the subject side doesn't need the attribute for those accesses anyway.
+type mods_app, domain;
+
+# Greybus / Moto Mods sysfs. Declared public rather than vendor because
+# system_suspend - a core domain - reads the greybus wakeup counters, and
+# core policy cannot reference a vendor-declared type.
+type sysfs_greybus, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_mods_camd, fs_type, sysfs_type, mlstrustedobject;
+
+# Greybus firmware staging dir (/data/gbfirmware)
+type greybus_fw_data_file, file_type, core_data_file_type, data_file_type, mlstrustedobject;
+
+# The ModService binder service
+type mods_service, service_manager_type;

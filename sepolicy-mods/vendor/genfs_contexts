@@ -1,0 +1,9 @@
+# beckham labels these under /devices/soc/... - on 4.14+ the same nodes live
+# under /devices/platform/soc/..., so the prefixes differ from that reference.
+genfscon sysfs /devices/platform/mods_ap                        u:object_r:sysfs_greybus:s0
+genfscon sysfs /devices/platform/soc/soc:muc_svc@0              u:object_r:sysfs_greybus:s0
+genfscon sysfs /devices/platform/soc/soc:muc                    u:object_r:sysfs_greybus:s0
+genfscon sysfs /devices/platform/soc/0.apba_ctrl                u:object_r:sysfs_greybus:s0
+genfscon sysfs /devices/platform/mods_codec.0                   u:object_r:sysfs_greybus:s0
+genfscon sysfs /class/power_supply/gb_ptp                       u:object_r:sysfs_greybus:s0
+genfscon sysfs /module/qpnp_smbcharger_mmi                      u:object_r:sysfs_greybus:s0

@@ -1,0 +1,23 @@
+# Mod camera daemon.
+type mods_camd, domain;
+type mods_camd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(mods_camd)
+
+allow mods_camd ion_device:chr_file rw_file_perms;
+allow mods_camd video_device:chr_file rw_file_perms;
+allow mods_camd mods_camd_device:chr_file rw_file_perms;
+
+allow mods_camd self:netlink_kobject_uevent_socket { bind create getopt read setopt };
+allow mods_camd sysfs_mods_camd:dir r_dir_perms;
+allow mods_camd sysfs_mods_camd:file rw_file_perms;
+allow mods_camd sysfs_greybus:dir r_dir_perms;
+allow mods_camd sysfs_greybus:file rw_file_perms;
+
+# Scans v4l2 device names to find the mod camera. beckham grants generic
+# sysfs here too; on this device the nodes also carry vendor_sysfs_graphics.
+allow mods_camd sysfs:file { getattr open read };
+allow mods_camd vendor_sysfs_graphics:file { getattr open read };
+
+allow mods_camd cameraserver:fd use;
+allow mods_camd gpu_device:chr_file { ioctl open read write };
+allow mods_camd surfaceflinger:fd use;

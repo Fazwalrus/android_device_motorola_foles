@@ -1,0 +1,39 @@
+# ModService. Mirrors sdm660-common/beckham, minus rules for hardware this
+# device doesn't expose.
+allow mods_app ion_device:chr_file { open read };
+allow mods_app self:netlink_kobject_uevent_socket { bind create read setopt };
+
+allow mods_app greybus_fw_data_file:dir create_dir_perms;
+allow mods_app greybus_fw_data_file:file create_file_perms;
+allow mods_app greybus_raw_device:chr_file open;
+
+allow mods_app audioserver_service:service_manager find;
+allow mods_app cameraserver_service:service_manager find;
+allow mods_app mods_service:service_manager { add find };
+allow mods_app radio_service:service_manager find;
+
+allow mods_app sysfs_battery_supply:dir r_dir_perms;
+allow mods_app sysfs_battery_supply:{ file lnk_file } r_file_perms;
+allow mods_app sysfs_graphics:dir search;
+allow mods_app sysfs_graphics:file rw_file_perms;
+allow mods_app sysfs_greybus:dir r_dir_perms;
+allow mods_app sysfs_greybus:{ file lnk_file } rw_file_perms;
+allow mods_app sysfs_mods_camd:dir r_dir_perms;
+allow mods_app sysfs_mods_camd:file rw_file_perms;
+allow mods_app sysfs_thermal:dir r_dir_perms;
+allow mods_app sysfs_thermal:{ file lnk_file } r_file_perms;
+allow mods_app sysfs_usb_supply:dir r_dir_perms;
+allow mods_app sysfs_usb_supply:{ file lnk_file } r_file_perms;
+
+allow mods_app mods_camd_device:chr_file rw_file_perms;
+
+get_prop(mods_app, moto_boot_prop)
+
+# ModService's own app data. beckham grants system_app_data_file because its
+# ModService runs as the system uid; ours runs as a normal app uid, so its
+# data is app_data_file instead.
+allow mods_app app_data_file:dir { getattr search };
+allow mods_app app_data_file:file lock;
+
+# Read by the Greybus Dispatch thread on startup.
+get_prop(mods_app, retaildemo_prop)

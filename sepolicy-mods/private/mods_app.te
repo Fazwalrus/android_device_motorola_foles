@@ -1,0 +1,17 @@
+# ModService domain setup.
+typeattribute mods_app coredomain;
+
+app_domain(mods_app)
+net_domain(mods_app)
+
+allow mods_app {
+    app_api_service
+    system_api_service
+}:service_manager find;
+
+# system_suspend accounts wakeup sources on the greybus host device
+# (/sys/devices/platform/mods_ap/greybus1/wakeup/wakeup*/event_count).
+# Must live in private: system_suspend is a core domain and isn't visible
+# to vendor policy.
+allow system_suspend sysfs_greybus:dir r_dir_perms;
+allow system_suspend sysfs_greybus:file r_file_perms;

@@ -1,0 +1,5 @@
+# ModService.
+# beckham matches user=system because its ModService runs as the system uid;
+# ours is re-signed with the platform key but still runs as a normal app uid
+# (verified: com.motorola.modservice/u0a63), so match on _app instead.
+user=_app seinfo=platform name=com.motorola.modservice domain=mods_app type=app_data_file levelFrom=user

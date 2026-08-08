@@ -1,0 +1,4 @@
+# ModHwBinderService registers the mod HAL.
+add_hwservice(system_app, hal_modmanager_hwservice)
+allow system_app mods_service:service_manager { add find };
+allow system_app mods_app:unix_stream_socket connectto;
